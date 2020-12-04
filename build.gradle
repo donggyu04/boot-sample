@@ -27,6 +27,9 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+
+	compile group: 'com.graphql-java', name: 'graphql-java-annotations', version: '3.0.3'
+	compile group: 'io.ratpack', name: 'ratpack-core', version: '1.8.0'
 }
 
 test {
