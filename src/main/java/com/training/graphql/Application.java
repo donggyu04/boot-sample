@@ -10,5 +10,4 @@ public class Application {
                 server.handlers(chain -> chain.post("users", new UserHandler())));
         ratpackServer.start();
     }
-
 }
