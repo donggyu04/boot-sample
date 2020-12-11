@@ -1,8 +1,12 @@
 package com.training.bootsample.controller;
 
+import com.training.bootsample.model.NgrinderParam;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +19,8 @@ public class CommonController {
     }
 
     @GetMapping("/language")
-    public Map<String, Object> chinesesTest() {
+    public Map<String, Object> chinesesTest(HttpServletResponse httpServletResponse) {
+//        httpServletResponse.addHeader("Content-Type", "application/json;charset=UTF-8");
         Map<String, Object> response = new HashMap<>();
         Map<String, Object> greetings = new HashMap<>();
 
@@ -33,5 +38,10 @@ public class CommonController {
         response.put("Greetings", greetings);
 
         return response;
+    }
+
+    @PostMapping("/save")
+    public void save(@RequestBody NgrinderParam ngrinderParam) {
+        System.out.println(ngrinderParam);
     }
 }

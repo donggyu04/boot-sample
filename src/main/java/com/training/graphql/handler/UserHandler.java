@@ -29,24 +29,25 @@ public class UserHandler implements Handler {
     @Override
     public void handle(Context context) throws Exception {
         context.parse(Map.class)
-                .then(payload -> {
+               .then(payload -> {
                     Map<String, Object> parameters = (Map<String, Object>) payload.get("parameters");
-                    ExecutionResult executionResult = graphql.execute(payload.get("query")
-                            .toString(), null, this, parameters);
+                    ExecutionResult executionResult = graphql.execute(payload.get("query").toString(),
+                            null, this, parameters);
+
                     Map<String, Object> result = new LinkedHashMap<>();
 
                     if (executionResult.getErrors().isEmpty()) {
                         result.put("data", executionResult.getData());
                     } else {
                         result.put("errors", executionResult.getErrors());
-                        log.warn("Errors: " + executionResult.getErrors());
+                        log.error("Errors: " + executionResult.getErrors());
                     }
 
                     context.render(json(result));
                 });
     }
 
-    public static List<User> getUsers() {
+    public List<User> getUsers() {
         return (List<User>) userDB.values();
     }
 
