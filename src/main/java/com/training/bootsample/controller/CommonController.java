@@ -1,10 +1,9 @@
 package com.training.bootsample.controller;
 
 import com.training.bootsample.model.NgrinderParam;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -40,8 +39,30 @@ public class CommonController {
         return response;
     }
 
-    @PostMapping("/save")
-    public void save(@RequestBody NgrinderParam ngrinderParam) {
+    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void jsonBody(@RequestBody NgrinderParam ngrinderParam) {
         System.out.println(ngrinderParam);
     }
+
+    @PostMapping(value = "/", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public void formBody(NgrinderParam ngrinderParam) {
+        System.out.println(ngrinderParam);
+    }
+
+    @GetMapping("/")
+    public void queryString(@RequestParam(required = false) String name,
+                            @RequestParam(required = false) int age) {
+        System.out.println(name + ", " + age);
+    }
+
+    @PatchMapping("/")
+    public void patchApi(@RequestBody NgrinderParam ngrinderParam) {
+        System.out.println(ngrinderParam);
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.HEAD)
+    public void headApi(@RequestParam(required = false) String name) {
+        System.out.println(name);
+    }
+
 }
