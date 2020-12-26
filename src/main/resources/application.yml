@@ -8,6 +8,8 @@ server:
 #    key-alias: bns-ssl
 
 spring:
+  profiles:
+    active: dev
   h2:
     console:
       enabled: true

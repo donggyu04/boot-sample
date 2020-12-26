@@ -3,6 +3,7 @@ package com.training.bootsample.controller;
 import com.training.bootsample.model.NgrinderParam;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +38,12 @@ public class CommonController {
         response.put("Greetings", greetings);
 
         return response;
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/secret/message")
+    public String getSecretMessage() {
+        return "This is secret message, only user could be getting this";
     }
 
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
