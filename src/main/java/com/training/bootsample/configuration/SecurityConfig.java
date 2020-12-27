@@ -38,7 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .logout()
             .logoutUrl("/perform-logout")
-            .deleteCookies("JSESSIONID");
+            .deleteCookies("JSESSIONID")
+            .and()
+            .rememberMe().key("rememberTest");
     }
 
     @Bean
